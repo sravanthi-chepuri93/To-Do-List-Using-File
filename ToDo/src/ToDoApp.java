@@ -36,14 +36,12 @@ class ToDoListApp {
             System.out.println("No tasks have been found to remove. Please add tasks first.");
         }
         else{
-            System.out.println("Below are the list of all you To Do List Tasks. Please enter a task number from below to remove. " );
-            int i=1;
-            for (String task : todoList) {
-                System.out.println(i+"."+task);
-                i++;
-            }
-            System.out.println("");
+            //To-Do
         }
+    }
+
+    public void removeAllTasks(){
+        //To-Do
     }
 }
 
@@ -76,6 +74,7 @@ class test{
                     todoList.removeTasks();
                     break;
                 case 4:
+
                     break;
                 case 5:
                     appIsRunning = false;
