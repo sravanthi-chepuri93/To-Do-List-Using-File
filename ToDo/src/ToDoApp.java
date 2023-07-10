@@ -36,12 +36,35 @@ class ToDoListApp {
             System.out.println("No tasks have been found to remove. Please add tasks first.");
         }
         else{
-            //To-Do
+            if (todoList.isEmpty()) {
+                System.out.println("No tasks have been found to remove. Please add tasks first.");
+            } else {
+                while(true){
+                    System.out.println("Enter the task number to remove:");
+                    Scanner sc = new Scanner(System.in);
+                    int taskNumber = sc.nextInt();
+                    if (taskNumber >= 1 && taskNumber <= todoList.size()) {
+                        String removedTask = todoList.get(taskNumber - 1);
+                        todoList.remove(taskNumber - 1);
+                        System.out.println("Task \"" + removedTask + "\" has been removed.");
+                        break;
+                    } else {
+                        System.out.println("Invalid task number. Please enter a valid task number.");
+                    }
+                }
+            }
+            
         }
     }
 
     public void removeAllTasks(){
-        //To-Do
+        if(todoList.isEmpty()){
+            System.out.println("No tasks have been found to remove. Please add tasks first.");
+        }
+        else {
+            todoList.clear();
+            System.out.println("All to-do list tasks have been removed");
+        }
     }
 }
 
@@ -74,11 +97,13 @@ class test{
                     todoList.removeTasks();
                     break;
                 case 4:
-
+                    todoList.removeAllTasks();
                     break;
                 case 5:
                     appIsRunning = false;
                     break;
+                default:
+                    System.out.println("Please enter a valid selection.");
             }
         }
         System.out.println("Application has been closed. Thank you for using ToDoList Application.");
