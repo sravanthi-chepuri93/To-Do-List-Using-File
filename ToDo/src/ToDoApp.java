@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,28 +10,47 @@ class ToDoListApp {
         todoList = new ArrayList<>();
     }
     public void addTask(String task){
-        if(todoList.size() > 9){
-            System.out.println("you cannot enter more than 10 tasks");
-        }
-        else{
-            todoList.add(task);
-            System.out.println("your task has been successfully added: "+task);
+        String filePath ="C:/Users/srava/OneDrive/Desktop/java/Rakesh_toDoLists.txt";
+        File f = new File(filePath);
+        addTextToFile(f, task);
+    }
+
+    public static void addTextToFile(File file, String textToAdd) {
+        try {
+            FileWriter fileWriter = new FileWriter(file, true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write(textToAdd);
+            bufferedWriter.newLine();
+            bufferedWriter.close();
+            System.out.println("your task has been successfully added: "+textToAdd);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
-    public void displayTasks(){
-        if(todoList.isEmpty()){
-            System.out.println("No tasks have been found. Please add tasks first.");
-        }
-        else{
-            System.out.println("Below are the list of all you To Do List Tasks");
-            int i=1;
-            for (String task : todoList) {
-                System.out.println(i+"."+task);
-                i++;
+    public void displayTasks() {
+        String filePath = "C:/Users/srava/OneDrive/Desktop/java/Rakesh_toDoLists.txt";
+        File file = new File(filePath);
+        try {
+            if (file.exists()) {
+                if (file.length() == 0) {
+                    System.out.println("No tasks have been found. Please add tasks first.");
+                } else {
+                    BufferedReader reader = new BufferedReader(new FileReader(file));
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        System.out.println(line);
+                    }
+                    reader.close();
+                }
+            } else {
+                System.out.println("File does not exist.");
             }
-            System.out.println("");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+
+
     public void removeTasks(){
         if(todoList.isEmpty()){
             System.out.println("No tasks have been found to remove. Please add tasks first.");
